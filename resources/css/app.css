@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+table.dataTable thead th, 
+table.dataTable thead td {
+    @apply border-b border-gray-300;
+}
+
+table.dataTable.no-footer {
+    @apply border-b border-gray-300;
+}
+
+table.dataTable tbody th, 
+table.dataTable tbody td {
+    @apply border border-gray-300 h-5;
+}
+
+/* Gaya pagination DataTables */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    @apply inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50;
+}
+
+.btn-primary{
+    @apply p-2 text-center bg-[#007bff] text-white rounded-md hover:bg-[#0069d9] transition-all duration-300;
+}
+
+.btn-success{
+    @apply p-2 text-center bg-[#28a745] text-white rounded-md hover:bg-[#218838] transition-all duration-300;
+}
+
+.btn-danger{
+    @apply p-2 text-center bg-[#ffc107] text-black rounded-md hover:bg-[#e0a800] transition-all duration-300;
+}
+
+.btn-warning{
+    @apply  p-2 text-center bg-[#dc3545] text-white rounded-md hover:bg-[#c82333] transition-all duration-300;
+}
+
+.btn-ghost-primary{
+    @apply p-2 text-center border-[1px] border-[#007bff] text-[#007bff] rounded-md hover:bg-[#007bff] hover:text-white transition-all duration-300;
+}
+
+.btn-ghost-success{
+    @apply p-2 text-center border-[1px] border-[#28a745] text-[#28a745] rounded-md hover:bg-[#28a745] hover:text-white transition-all duration-300;
+}
+
+.btn-ghost-danger{
+    @apply p-2 text-center border-[1px] border-[#ffc107] text-[#ffc107] rounded-md hover:bg-[#ffc107] hover:text-white transition-all duration-300;
+}
+
+.btn-ghost-warning{
+    @apply p-2 text-center border-[1px] border-[#dc3545] text-[#dc3545] rounded-md hover:bg-[#dc3545] hover:text-white transition-all duration-300;
+}
+
+.btn-secondary{
+    @apply p-2 text-center rounded-md bg-[#6c757d] hover:bg-[#5a6268] text-white transition-all duration-300;
+}
+
+
+trix-editor {
+    @apply p-0 m-0 box-border;
+  }
+  
+  trix-editor h1,
+  trix-editor h2,
+  trix-editor h3,
+  trix-editor h4,
+  trix-editor h5,
+  trix-editor h6 {
+    @apply mt-2 mb-2;
+  }
+  
+  trix-editor h1 {
+    @apply text-2xl font-bold;
+  }
+  
+  trix-editor h2 {
+    @apply text-xl font-bold;
+  }
+  
+  trix-editor h3 {
+    @apply text-lg font-bold;
+  }
+  
+  trix-editor h4 {
+    @apply text-base font-bold;
+  }
+  
+  trix-editor h5 {
+    @apply text-sm font-bold;
+  }
+  
+  trix-editor h6 {
+    @apply text-xs font-bold;
+  }
+  
+  trix-editor p {
+    @apply mt-2 mb-2 text-base leading-normal;
+  }
+  
+  trix-editor blockquote {
+    @apply p-2 pl-4 my-2 border-l-4 border-gray-300 bg-[#f5f7fb] italic;
+  }
+  
+  trix-editor ul,
+  trix-editor ol {
+    @apply my-2 pl-8 list-disc list-outside;
+  }
+  
+  trix-editor ol {
+    @apply list-decimal;
+  }
+  
+  trix-editor ul li,
+  trix-editor ol li {
+    @apply mb-2 text-base leading-normal;
+  }
+  trix-editor code {
+    @apply bg-gray-100 p-1 px-2 rounded font-mono;
+  }
