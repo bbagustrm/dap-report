@@ -16,7 +16,50 @@ use DateTime;
 
 class DapController extends Controller
 {
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = Daily::select('dailies.*', 'users.name as user_name', 'divisis.code as division_code', 'divisis.name as division_name')
+                ->join('users', 'users.id', '=', 'dailies.user_id')
+                ->join('divisis', 'divisis.id', '=', 'dailies.division_id');
 
+            if ($request->has('start_date') && $request->has('end_date') && $request->start_date && $request->end_date) {
+                $start_date = $request->start_date;
+                $end_date = $request->end_date;
+                $query->whereBetween('dailies.date', [$start_date, $end_date]);
+            }
+
+            if ($request->has('division') && $request->division) {
+                $division = $request->division;
+                $query->where('divisis.name', $division);
+            }
+
+            $dailies = $query->get();
+
+            return datatables()->of($dailies)
+                ->addColumn('action', function ($row) {
+                    $showUrl = route('dailies.show', $row->id);
+                    $editUrl = route('dailies.edit', $row->id);
+                    $deleteUrl = route('dailies.destroy', $row->id);
+                    $csrfToken = csrf_token();
+                    $btn = '<a href="' . $showUrl . '" class="btn-primary">Show</a>';
+                    $btn .= ' ';
+                    $btn .= '<a href="' . $editUrl . '" class="btn-danger">Edit</a>';
+                    $btn .= ' ';
+                    $btn .= '<form action="' . $deleteUrl . '" method="POST" style="display:inline-block;">
+                            ' . method_field('DELETE') . '
+                            <input type="hidden" name="_token" value="' . $csrfToken . '">
+                            <button type="submit" class="btn-warning" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                         </form>';
+                    return $btn;
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $divisions = Divisi::all();
+        return view('daily', compact('divisions'));
+    }
+    
     public function create()
     {
         $daily = Daily::select('dailies.*', 'users.name as user_name', 'divisis.code as division_code', 'divisis.name as division_name')
@@ -63,54 +106,8 @@ class DapController extends Controller
         $daily->date = substr($daily->created_at, 0, 10);
         $daily->save();
 
-        return redirect('/table');
+        return redirect('/daily');
     }
-
-
-    public function dataTable(Request $request)
-    {
-        if ($request->ajax()) {
-            $query = Daily::select('dailies.*', 'users.name as user_name', 'divisis.code as division_code', 'divisis.name as division_name')
-                ->join('users', 'users.id', '=', 'dailies.user_id')
-                ->join('divisis', 'divisis.id', '=', 'dailies.division_id');
-
-            if ($request->has('start_date') && $request->has('end_date') && $request->start_date && $request->end_date) {
-                $start_date = $request->start_date;
-                $end_date = $request->end_date;
-                $query->whereBetween('dailies.date', [$start_date, $end_date]);
-            }
-
-            if ($request->has('division') && $request->division) {
-                $division = $request->division;
-                $query->where('divisis.name', $division);
-            }
-
-            $dailies = $query->get();
-
-            return datatables()->of($dailies)
-                ->addColumn('action', function ($row) {
-                    $showUrl = route('dailies.show', $row->id);
-                    $editUrl = route('dailies.edit', $row->id);
-                    $deleteUrl = route('dailies.destroy', $row->id);
-                    $csrfToken = csrf_token();
-                    $btn = '<a href="' . $showUrl . '" class="btn-primary">Show</a>';
-                    $btn .= ' ';
-                    $btn .= '<a href="' . $editUrl . '" class="btn-danger">Edit</a>';
-                    $btn .= ' ';
-                    $btn .= '<form action="' . $deleteUrl . '" method="POST" style="display:inline-block;">
-                            ' . method_field('DELETE') . '
-                            <input type="hidden" name="_token" value="' . $csrfToken . '">
-                            <button type="submit" class="btn-warning" onclick="return confirm(\'Are you sure?\')">Delete</button>
-                         </form>';
-                    return $btn;
-                })
-                ->addIndexColumn()
-                ->make(true);
-        }
-        $divisions = Divisi::all();
-        return view('table', compact('divisions'));
-    }
-
 
     /**
      * Display the specified resource.
@@ -198,7 +195,7 @@ class DapController extends Controller
         $daily->save();
 
         // Redirect ke halaman table
-        return redirect('/table');
+        return redirect('/daily');
     }
 
     /**
@@ -209,6 +206,6 @@ class DapController extends Controller
         $daily = Daily::find($id);
         $daily->delete();
 
-        return redirect('/table');
+        return redirect('/daily');
     }
 }

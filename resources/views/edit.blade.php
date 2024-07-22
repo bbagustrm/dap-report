@@ -45,7 +45,7 @@
                         <input id="x" type="hidden" name="note" id="note">
                         <trix-editor input="x" class="min-h-[200px]">{!! $daily->note !!}</trix-editor>
                         <div class="w-full flex gap-1">
-                            <a href="{{ url('/table') }}" class="btn-ghost-warning">Cancel</a>
+                            <a href="{{ url('/daily') }}" class="btn-ghost-warning">Cancel</a>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </form>

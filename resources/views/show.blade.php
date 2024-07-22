@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Show Daily</title>
     @vite('resources/css/app.css')
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 </head>
 
 <body class="overflow-x-hidden bg-[#f5f7fb] ">
@@ -28,12 +26,12 @@
                                 <p class="">created_at : {{ $daily->created_at }}</p>
                                 <p class="">updated_at : {{ $daily->updated_at }}</p>
                             </div>
-                            <div class="p-2 min-h-64 border-[1px] border-gray-300 rounded-sm">
-                                {!! $daily->note !!}
+                            <div class="p-3 min-h-64 border-[1px] border-gray-300 rounded-sm">
+                                <trix-editor input="x" class="min-h-[200px]">{!! $daily->note !!}</trix-editor>
                             </div>
                         </div>
                         <div class="w-full flex gap-1">
-                            <a href="{{ url('/table') }}" class="btn-warning">Back</a>
+                            <a href="{{ url('/daily') }}" class="btn-warning">Back</a>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
             <a href="#" class="text-white text-base no-underline">DAP</a>
         </li>
         <li class="px-8 py-2 font-semibold text-gray-300 hover:text-white cursor-pointer">
-            <a href="#" class="text-white text-base no-underline">Report</a>
+            <a href="" class="text-white text-base no-underline">Report</a>
         </li>
     </ul>
 </div>
