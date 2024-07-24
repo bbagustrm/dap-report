@@ -120,7 +120,7 @@
                                 ],
                             });
                             $('#filter').click(function() {
-                                daily.draw();
+                                table.draw();
                             });
                         });
                     </script>

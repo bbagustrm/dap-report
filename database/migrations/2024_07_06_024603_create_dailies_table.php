@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('date')->nullable(true);
             $table->string('note')->nullable(true);
             $table->timestamps();
+            
+       
         });
     }
 

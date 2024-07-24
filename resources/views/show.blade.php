@@ -20,15 +20,48 @@
                 <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
                     <div class="flex flex-col gap-4">
                         <div class="flex flex-col gap-4">
-                            <div class="flex flex-col gap-1">
-                                <p for="name">Name : {{ $daily->user_name }}</p>
-                                <p for="name">Divisi : {{ $daily->division_name }}</p>
-                                <p class="">created_at : {{ $daily->created_at }}</p>
-                                <p class="">updated_at : {{ $daily->updated_at }}</p>
-                            </div>
-                            <div class="p-3 min-h-64 border-[1px] border-gray-300 rounded-sm">
-                                <trix-editor input="x" class="min-h-[200px]">{!! $daily->note !!}</trix-editor>
-                            </div>
+                            <table>
+                                <tr>
+                                    <td class="border-[1px] w-[15vw]  border-gray-300 px-2 py-2 align-top">Name</td>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2">{{ $daily->user_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2 align-top">Tanggal</td>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2">{{ $daily->date }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2 align-top">Divisi</td>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2">{{ $daily->division_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2 bg-gray-100 align-top">Keterangan
+                                    </td>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2 bg-gray-100">
+                                        <trix-editor input="x" class="min-h-[80px]">{!! $daily->note !!}
+                                        </trix-editor>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2 align-top">Report DAP</td>
+                                    <td class="border-[1px] border-gray-300 px-2 py-2 align-top">
+                                        @foreach ($reports as $report)
+                                            <div class="my-2">
+                                                @if ($report->tipe == 1)
+                                                    <span
+                                                        class="px-2 text-center border-[1px] border-[#28a745] text-[#28a745] rounded-full">harian</span>
+                                                @elseif ($report->tipe == 2)
+                                                    <span
+                                                        class="px-2 text-center border-[1px] border-[#ffc107] text-[#ffc107] rounded-full">mingguan</span>
+                                                @elseif ($report->tipe == 3)
+                                                    <span
+                                                        class="px-2 text-center border-[1px] border-[#dc3545] text-[#dc3545] rounded-full">bulanan</span>
+                                                @endif
+                                                {{ $report->tugas }} : {{ $report->score }} / {{ $report->target }}
+                                            </div>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="w-full flex gap-1">
                             <a href="{{ url('/daily') }}" class="btn-warning">Back</a>

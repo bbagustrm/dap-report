@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('division_id');
             $table->integer('user_id');
             $table->timestamps();
+        
         });
     }
 

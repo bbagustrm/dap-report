@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('id_tugas')->nullable(true);
             $table->integer('daily_id')->nullable(true);
             $table->string('score')->nullable(true);
+
+            $table->foreign('daily_id')->references('id')->on('dailies')->onDelete('cascade');
         });
     }
 

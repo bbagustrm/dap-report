@@ -93,7 +93,7 @@ class ImportController extends Controller
         $jabatan = file_get_contents('https://absensi.campus.co.id/api/magang/jabatan_attr');
         $data_jabatan = json_decode($jabatan, true);
 
-        // dd($data_divisi);
+        // dd($data_jabatan);
 
         foreach ($data_jabatan as $data) {
             Jabatan::insert([
@@ -119,7 +119,7 @@ class ImportController extends Controller
         $dailies = file_get_contents('https://absensi.campus.co.id/api/magang/dailies');
         $data_dailies = array_slice(json_decode($dailies, true), 1);
 
-        dd($data_dailies);
+        // dd($data_dailies);
 
         foreach ($data_dailies as $data) {
             Daily::insert([
@@ -145,15 +145,16 @@ class ImportController extends Controller
     public function import_report()
     {
         // dailies.JSON
-        $dailies = file_get_contents('https://absensi.campus.co.id/api/magang/dailies');
-        $data_dailies = array_slice(json_decode($dailies, true), 1);
+        $report = file_get_contents('https://absensi.campus.co.id/api/magang/dailies');
+        $data_report= array_slice(json_decode($report, true), 1);
 
+        // dd($data_report);
 
-        foreach($data_dailies as $dailies){
-            foreach ($dailies['report'] as $data) {
+        foreach($data_report as $report){
+            foreach ($report['report'] as $data) {
                 Report::insert([
                     'id_tugas' => $data['id_tugas'],
-                    'daily_id' => $dailies['id'],
+                    'daily_id' => $report['id'],
                     'score' => $data['score'],
                 ]);
             }

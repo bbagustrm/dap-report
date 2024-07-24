@@ -11,8 +11,4 @@ class Daily extends Model
 {
     use HasFactory;
 
-    public function reports(): HasMany
-    {
-        return $this->hasMany(Report::class);
-    }
 }

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('tugas')->nullable(true);
             $table->string('tipe')->nullable(true);
             $table->string('target')->nullable(true);
+            
+            $table->foreign('divisi_id')->references('id')->on('divisis')->onDelete('cascade');
         });
     }
 

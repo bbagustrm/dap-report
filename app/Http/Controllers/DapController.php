@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Divisi;
 use App\Models\Daily;
+use App\Models\Report;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 
@@ -59,7 +60,7 @@ class DapController extends Controller
         $divisions = Divisi::all();
         return view('daily', compact('divisions'));
     }
-    
+
     public function create()
     {
         $daily = Daily::select('dailies.*', 'users.name as user_name', 'divisis.code as division_code', 'divisis.name as division_name')
@@ -114,15 +115,28 @@ class DapController extends Controller
      */
     public function show(string $id)
     {
-        $query = Daily::select('dailies.*', 'users.name as user_name', 'divisis.code as division_code', 'divisis.name as division_name')
+        $query = Daily::select(
+            'dailies.*',
+            'users.name as user_name',
+            'divisis.code as division_code',
+            'divisis.name as division_name'
+        )
             ->join('users', 'users.id', '=', 'dailies.user_id')
             ->join('divisis', 'divisis.id', '=', 'dailies.division_id');
 
         $daily = $query->find($id);
 
+        // dd($daily);
+        $reports = Report::select('reports.id_tugas', 'reports.score', 'tugas.tugas', 'tugas.tipe', 'tugas.target')
+            ->join('tugas', 'tugas.id_tugas', '=', 'reports.id_tugas')
+            ->where('reports.daily_id', $id)
+            ->get();
+
+        $sortedReports = $reports->sortBy('tipe');
 
         $view_data = [
-            'daily' => $daily
+            'daily' => $daily,
+            'reports' => $sortedReports
         ];
 
         return view('show', $view_data);
