@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Daily extends Model
 {
+    protected $casts = [
+        'report' => 'array',
+    ];
+
     use HasFactory;
 
 }

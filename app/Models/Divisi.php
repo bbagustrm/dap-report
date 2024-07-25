@@ -9,9 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Divisi extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'tugas' => 'array',
+    ];
 
-    public function tugass(): HasMany
-    {
-        return $this->hasMany(Tugas::class);
-    }
 }

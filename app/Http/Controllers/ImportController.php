@@ -27,6 +27,7 @@ class ImportController extends Controller
                 'group_id' => $data['group_id'],
                 'code' => $data['code'],
                 'name' => $data['name'],
+                'tugas' => json_encode($data['tugas']),
                 'wewenang' => $data['wewenang'],
                 'created_at' => $data['created_at'] ? DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $data['created_at'])->format('Y-m-d H:i:s') : null,
                 'updated_at' => $data['updated_at'] ? DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $data['updated_at'])->format('Y-m-d H:i:s') : null
@@ -126,6 +127,7 @@ class ImportController extends Controller
                 'id' => $data['id'],
                 'user_id' => $data['user_id'],
                 'division_id' => $data['division_id'],
+                'report' => json_encode($data['report']),
                 'date' => $data['date'],
                 'note' => $data['note'],
                 'created_at' => $data['created_at'] ? DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $data['created_at'])->format('Y-m-d H:i:s') : null,

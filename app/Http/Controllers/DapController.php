@@ -107,6 +107,9 @@ class DapController extends Controller
         $daily->date = substr($daily->created_at, 0, 10);
         $daily->save();
 
+        // new report
+        // $daily->id
+
         return redirect('/daily');
     }
 
@@ -126,13 +129,29 @@ class DapController extends Controller
 
         $daily = $query->find($id);
 
-        // dd($daily);
-        $reports = Report::select('reports.id_tugas', 'reports.score', 'tugas.tugas', 'tugas.tipe', 'tugas.target')
-            ->join('tugas', 'tugas.id_tugas', '=', 'reports.id_tugas')
-            ->where('reports.daily_id', $id)
-            ->get();
+        if (!$daily) {
+            return redirect()->back()->withErrors(['Daily record not found']);
+        }
 
-        $sortedReports = $reports->sortBy('tipe');
+        $reports = is_string($daily->report) ? json_decode($daily->report, true) : $daily->report;
+
+        $divisi = Divisi::find($daily->division_id);
+        $tugas = is_string($divisi->tugas) ? json_decode($divisi->tugas, true) : $divisi->tugas;
+
+        $reports_with_details = array_map(function ($report) use ($tugas) {
+            foreach ($tugas as $task) {
+                if ($task['id_tugas'] == $report['id_tugas']) {
+                    return array_merge($report, [
+                        'tugas' => $task['tugas'],
+                        'tipe' => $task['tipe'],
+                        'target' => $task['target'],
+                    ]);
+                }
+            }
+            return $report;
+        }, $reports);
+
+        $sortedReports = collect($reports_with_details)->sortBy('tipe');
 
         $view_data = [
             'daily' => $daily,
@@ -147,18 +166,40 @@ class DapController extends Controller
      */
     public function edit(string $id)
     {
-        $query = Daily::select('dailies.*', 'users.name as user_name', 'divisis.code as division_code', 'divisis.name as division_name')
+        $query = Daily::select(
+            'dailies.*',
+            'users.name as user_name',
+            'divisis.code as division_code',
+            'divisis.name as division_name'
+        )
             ->join('users', 'users.id', '=', 'dailies.user_id')
             ->join('divisis', 'divisis.id', '=', 'dailies.division_id');
 
         $daily = $query->find($id);
 
-        $reports = Report::select('reports.id_tugas', 'reports.score', 'tugas.tugas', 'tugas.tipe', 'tugas.target')
-            ->join('tugas', 'tugas.id_tugas', '=', 'reports.id_tugas')
-            ->where('reports.daily_id', $id)
-            ->get();
+        if (!$daily) {
+            return redirect()->back()->withErrors(['Daily record not found']);
+        }
 
-        $sortedReports = $reports->sortBy('tipe');
+        $reports = is_string($daily->report) ? json_decode($daily->report, true) : $daily->report;
+
+        $divisi = Divisi::find($daily->division_id);
+        $tugas = is_string($divisi->tugas) ? json_decode($divisi->tugas, true) : $divisi->tugas;
+
+        $reports_with_details = array_map(function ($report) use ($tugas) {
+            foreach ($tugas as $task) {
+                if ($task['id_tugas'] == $report['id_tugas']) {
+                    return array_merge($report, [
+                        'tugas' => $task['tugas'],
+                        'tipe' => $task['tipe'],
+                        'target' => $task['target'],
+                    ]);
+                }
+            }
+            return $report;
+        }, $reports);
+
+        $sortedReports = collect($reports_with_details)->sortBy('tipe');
 
         $view_data = [
             'daily' => $daily,
@@ -185,20 +226,21 @@ class DapController extends Controller
         $daily->note = $note;
         $daily->updated_at = $date_current->format('Y-m-d H:i:s');
         $daily->date = substr($daily->updated_at, 0, 10);
-        $daily->save();
 
+        // Update reports JSON
         $reportsData = $request->input('reports', []);
+        $reports = [];
         foreach ($reportsData as $reportData) {
             if (isset($reportData['id_tugas']) && isset($reportData['score'])) {
-                $report = Report::where('id_tugas', $reportData['id_tugas'])
-                    ->where('daily_id', $id)
-                    ->first();
-                if ($report) {
-                    $report->score = $reportData['score'];
-                    $report->save();
-                }
+                $reports[] = [
+                    'id_tugas' => $reportData['id_tugas'],
+                    'score' => $reportData['score']
+                ];
             }
         }
+        $daily->report = json_encode($reports);
+
+        $daily->save();
 
         return redirect('/daily');
     }

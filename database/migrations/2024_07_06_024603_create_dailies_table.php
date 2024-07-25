@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('division_id');
+            $table->json('report')->nullable(true);
             $table->string('date')->nullable(true);
             $table->string('note')->nullable(true);
             $table->timestamps();
-            
-       
         });
     }
 

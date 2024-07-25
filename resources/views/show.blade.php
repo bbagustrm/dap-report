@@ -22,7 +22,7 @@
                         <div class="flex flex-col gap-4">
                             <table>
                                 <tr>
-                                    <td class="border-[1px] w-[15vw]  border-gray-300 px-2 py-2 align-top">Name</td>
+                                    <td class="border-[1px] w-[15vw] border-gray-300 px-2 py-2 align-top">Name</td>
                                     <td class="border-[1px] border-gray-300 px-2 py-2">{{ $daily->user_name }}</td>
                                 </tr>
                                 <tr>
@@ -37,8 +37,8 @@
                                     <td class="border-[1px] border-gray-300 px-2 py-2 bg-gray-100 align-top">Keterangan
                                     </td>
                                     <td class="border-[1px] border-gray-300 px-2 py-2 bg-gray-100">
-                                        <trix-editor input="x" class="min-h-[80px]">{!! $daily->note !!}
-                                        </trix-editor>
+                                        <trix-editor input="x"
+                                            class="min-h-[80px]">{!! $daily->note !!}</trix-editor>
                                     </td>
                                 </tr>
                                 <tr>
@@ -46,22 +46,24 @@
                                     <td class="border-[1px] border-gray-300 px-2 py-2 align-top">
                                         @foreach ($reports as $report)
                                             <div class="my-2">
-                                                @if ($report->tipe == 1)
+                                                @if ($report['tipe'] == 1)
                                                     <span
                                                         class="px-2 text-center border-[1px] border-[#28a745] text-[#28a745] rounded-full">harian</span>
-                                                @elseif ($report->tipe == 2)
+                                                @elseif ($report['tipe'] == 2)
                                                     <span
                                                         class="px-2 text-center border-[1px] border-[#ffc107] text-[#ffc107] rounded-full">mingguan</span>
-                                                @elseif ($report->tipe == 3)
+                                                @elseif ($report['tipe'] == 3)
                                                     <span
                                                         class="px-2 text-center border-[1px] border-[#dc3545] text-[#dc3545] rounded-full">bulanan</span>
                                                 @endif
-                                                {{ $report->tugas }} : {{ $report->score }} / {{ $report->target }}
+                                                {{ $report['tugas'] }} : {{ $report['score'] }} /
+                                                {{ $report['target'] }}
                                             </div>
                                         @endforeach
                                     </td>
                                 </tr>
                             </table>
+
                         </div>
                         <div class="w-full flex gap-1">
                             <a href="{{ url('/daily') }}" class="btn-warning">Back</a>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('group_id');
             $table->string('code')->nullable(true);
             $table->string('name')->nullable(true);
+            $table->json('tugas')->nullable(true);
             $table->string('wewenang')->nullable(true);
             $table->timestamps();
         });

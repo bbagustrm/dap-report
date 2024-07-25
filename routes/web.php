@@ -37,5 +37,3 @@ Route::get('/import-user', [ImportController::class, 'import_user']);
 Route::get('/import-group', [ImportController::class, 'import_group']);
 Route::get('/import-jabatan', [ImportController::class, 'import_jabatan']);
 Route::get('/import-daily', [ImportController::class, 'import_daily']);
-Route::get('/import-report', [ImportController::class, 'import_report']);
-Route::get('/import-tugas', [ImportController::class, 'import_tugas']);
