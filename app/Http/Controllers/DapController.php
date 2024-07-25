@@ -151,15 +151,18 @@ class DapController extends Controller
             ->join('users', 'users.id', '=', 'dailies.user_id')
             ->join('divisis', 'divisis.id', '=', 'dailies.division_id');
 
-
         $daily = $query->find($id);
-        $users = User::all();
-        $divisions = Divisi::all();
+
+        $reports = Report::select('reports.id_tugas', 'reports.score', 'tugas.tugas', 'tugas.tipe', 'tugas.target')
+            ->join('tugas', 'tugas.id_tugas', '=', 'reports.id_tugas')
+            ->where('reports.daily_id', $id)
+            ->get();
+
+        $sortedReports = $reports->sortBy('tipe');
 
         $view_data = [
             'daily' => $daily,
-            'users' => $users,
-            'divisions' => $divisions,
+            'reports' => $sortedReports
         ];
 
         return view('edit', $view_data);
@@ -170,45 +173,33 @@ class DapController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user_name = $request->input('user_name');
-        $division_name = $request->input('division_name');
         $note = $request->input('note');
 
-        // Cari user berdasarkan user_name
-        $user = User::where('name', $user_name)->first();
-        if (!$user) {
-            // Handle user tidak ditemukan
-            return redirect()->back()->withErrors(['User not found']);
-        }
-
-        // Cari division berdasarkan division_name
-        $division = Divisi::where('name', $division_name)->first();
-        if (!$division) {
-            // Handle division tidak ditemukan
-            return redirect()->back()->withErrors(['Division not found']);
-        }
-
-        // Ambil tanggal saat ini
         $date_current = new DateTime();
 
-        // Temukan Daily berdasarkan ID
         $daily = Daily::find($id);
         if (!$daily) {
-            // Handle Daily tidak ditemukan
             return redirect()->back()->withErrors(['Daily record not found']);
         }
 
-        // Perbarui field di Daily
-        $daily->user_id = $user->id;
-        $daily->division_id = $division->id;
         $daily->note = $note;
-
-        // Perbarui waktu updated_at dan date
         $daily->updated_at = $date_current->format('Y-m-d H:i:s');
         $daily->date = substr($daily->updated_at, 0, 10);
         $daily->save();
 
-        // Redirect ke halaman table
+        $reportsData = $request->input('reports', []);
+        foreach ($reportsData as $reportData) {
+            if (isset($reportData['id_tugas']) && isset($reportData['score'])) {
+                $report = Report::where('id_tugas', $reportData['id_tugas'])
+                    ->where('daily_id', $id)
+                    ->first();
+                if ($report) {
+                    $report->score = $reportData['score'];
+                    $report->save();
+                }
+            }
+        }
+
         return redirect('/daily');
     }
 
