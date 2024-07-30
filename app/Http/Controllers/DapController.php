@@ -58,7 +58,7 @@ class DapController extends Controller
                 ->make(true);
         }
         $divisions = Divisi::all();
-        return view('daily', compact('divisions'));
+        return view('dap/daily', compact('divisions'));
     }
 
     public function create()
@@ -76,7 +76,7 @@ class DapController extends Controller
             'divisions' => $divisions,
         ];
 
-        return view('create', $view_data);
+        return view('dap/create', $view_data);
     }
 
     public function store(Request $request)
@@ -158,7 +158,7 @@ class DapController extends Controller
             'reports' => $sortedReports
         ];
 
-        return view('show', $view_data);
+        return view('dap/show', $view_data);
     }
 
     /**
@@ -206,7 +206,7 @@ class DapController extends Controller
             'reports' => $sortedReports
         ];
 
-        return view('edit', $view_data);
+        return view('dap/edit', $view_data);
     }
 
     /**
