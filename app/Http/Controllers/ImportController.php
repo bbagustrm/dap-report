@@ -143,49 +143,4 @@ class ImportController extends Controller
 
         return response()->json(['message' => 'Data Daily imported successfully']);
     }
-
-    public function import_report()
-    {
-        // dailies.JSON
-        $report = file_get_contents('https://absensi.campus.co.id/api/magang/dailies');
-        $data_report= array_slice(json_decode($report, true), 1);
-
-        // dd($data_report);
-
-        foreach($data_report as $report){
-            foreach ($report['report'] as $data) {
-                Report::insert([
-                    'id_tugas' => $data['id_tugas'],
-                    'daily_id' => $report['id'],
-                    'score' => $data['score'],
-                ]);
-            }
-        }
-
-        return response()->json(['message' => 'Data Report imported successfully']);
-    }
-
-    public function import_tugas()
-    {
-        // divisi.JSON
-        $divisi = file_get_contents('https://absensi.campus.co.id/api/magang/divisi');
-        $data_divisi = json_decode($divisi, true);
-
-        // dd($data_divisi);
-
-        foreach($data_divisi as $divisi){
-            foreach ($divisi['tugas'] as $data) {
-                Tugas::insert([
-                    'id_tugas' => $data['id_tugas'],
-                    'divisi_id' => $divisi['id'],
-                    'tugas' => $data['tugas'],
-                    'tipe' => $data['tipe'],
-                    'target' => $data['target']
-                ]);
-            }
-        }
-
-        return response()->json(['message' => 'Data Tugas imported successfully']);
-    }
-
 }
