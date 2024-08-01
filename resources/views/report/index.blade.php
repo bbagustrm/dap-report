@@ -22,30 +22,16 @@
             <div class="w-full px-8">
                 <h1 class="text-xl py-2 mb-2">Daily Activity Progress Report</h1>
                 <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
-                    <div class="flex justify-between items-center">
-                        <a href="{{ route('dailies.create') }}" class="btn-primary flex items-center gap-2">
-                            <svg class="w-fit h-fit" width="24" height="24">
-                                <image xlink:href="{{ asset('assets/ic-plus-white.svg') }}" />
-                            </svg>
-                            Create</a>
+                    <div class="flex gap-2 justify-end">
                         <div class="flex gap-2">
-                            <div class="flex gap-2 items-center">
-                                <select id="division" class="border-[1px] px-2 h-6 border-gray-300">
-                                    <option value="">All Divisions</option>
-                                    @foreach ($divisions as $division)
-                                        <option value="{{ $division->name }}">{{ $division->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="flex gap-2 items-center">
-                                <input type="date" id="start_date" class="border-[1px] px-2 h-6 border-gray-300">
-                            </div>
-                            s.d
-                            <div class="flex gap-2">
-                                <input type="date" id="end_date" class="border-[1px] px-2 h-6 border-gray-300">
-                            </div>
-                            <button id="filter" class="px-4 bg-[#3b7ddd] text-white h-6">Filter</button>
+                            <select id="division" class="border-[1px] px-2 h-6 border-gray-300">
+                                <option value="">All Divisions</option>
+                                @foreach ($divisions as $division)
+                                    <option value="{{ $division->name }}">{{ $division->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
+                        <button id="filter" class="px-4 bg-[#3b7ddd] text-white h-6">Filter</button>
                     </div>
                     <hr class="my-2">
                     <table id="myTable" class="w-full border-[1px] border-gray-300">
@@ -54,9 +40,7 @@
                                 <th scope="col" class="w-4 border-[1px] border-gray-300">No</th>
                                 <th scope="col" class="border-[1px] border-gray-300">Name</th>
                                 <th scope="col" class="border-[1px] border-gray-300">Divisi</th>
-                                <th scope="col" class="w-[25vw] border-[1px] border-gray-300">Note</th>
-                                <th scope="col" class="w-32 border-[1px] border-gray-300">Tanggal</th>
-                                <th scope="col" class="w-48 border-[1px] border-gray-300">Action</th>
+                                <th scope="col" class="border-[1px] border-gray-300">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -66,7 +50,7 @@
                                 processing: true,
                                 serverSide: true,
                                 ajax: {
-                                    url: "{{ url('daily') }}",
+                                    url: "{{ url('report') }}",
                                     data: function(d) {
                                         d.start_date = $('#start_date').val();
                                         d.end_date = $('#end_date').val();
@@ -101,24 +85,6 @@
                                         searchable: true
                                     },
                                     {
-                                        data: 'note',
-                                        name: 'note',
-                                        orderable: false,
-                                        searchable: false,
-                                        render: function(data, type, row) {
-                                            var parser = new DOMParser();
-                                            var doc = parser.parseFromString(data, 'text/html');
-                                            var text = doc.body.textContent || "";
-                                            return '<div class="line-clamp-1">' + text + '</div>';
-                                        }
-                                    },
-                                    {
-                                        data: 'date',
-                                        name: 'date',
-                                        orderable: true,
-                                        searchable: false
-                                    },
-                                    {
                                         data: 'action',
                                         name: 'action',
                                         orderable: false,
@@ -132,10 +98,12 @@
                         });
                     </script>
                 </div>
+
             </div>
         </div>
-        <x-sidebar>
-        </x-sidebar>
+    </div>
+    <x-sidebar>
+    </x-sidebar>
     </div>
 
     @vite('resources/js/dom.js')

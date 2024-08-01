@@ -22,6 +22,7 @@ Route::put('/daily/update/{id}', [DapController::class, 'update'])->name('dailie
 Route::delete('/daily/delete/{id}', [DapController::class, 'destroy'])->name('dailies.destroy');
 
 Route::get('report', [ReportController::class, 'index'])->name('report.index');
+Route::get('/report/{id}', [ReportController::class, 'show'])->name('report.show');
 
 
 

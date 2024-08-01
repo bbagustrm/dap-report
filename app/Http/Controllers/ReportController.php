@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Daily;
 use App\Models\Divisi;
+use App\Models\Jabatan;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,55 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $id = 333;
+        if ($request->ajax()) {
+            $query = Jabatan::select('jabatans.*', 'users.name as user_name', 'divisis.name as division_name')
+                ->join('users', 'users.id', '=', 'jabatans.user_id')
+                ->join('divisis', 'divisis.id', '=', 'jabatans.division_id');
 
+            if ($request->has('division') && $request->division) {
+                $division = $request->division;
+                $query->where('divisis.name', $division);
+            }
+
+            $dailies = $query->get();
+
+            return datatables()->of($dailies)
+                ->addColumn('action', function ($row) {
+                    $showUrl = route('report.show', $row->user_id);
+                    $btn = '<a href="' . $showUrl . '" class="btn-primary">Show</a>';
+                    return $btn;
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $divisions = Divisi::all();
+
+        return view('report/index', compact('divisions'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
         $now = Carbon::now();
 
         $startDate = $now->copy()->subMonth()->startOfDay();
@@ -78,31 +124,7 @@ class ReportController extends Controller
             'divisiTugas' => $divisiTugas
         ];
 
-        return view('report/report', $view_data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return view('report/show', $view_data);
     }
 
     /**
