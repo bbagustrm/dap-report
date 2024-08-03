@@ -58,7 +58,8 @@ class DapController extends Controller
                 ->make(true);
         }
         $divisions = Divisi::all();
-        return view('dap/daily', compact('divisions'));
+
+        return view('dap/index', compact('divisions'));
     }
 
     public function create()
@@ -109,8 +110,7 @@ class DapController extends Controller
 
         // new report
         // $daily->id
-
-        return redirect('/daily');
+        return redirect('/daily')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -242,7 +242,7 @@ class DapController extends Controller
 
         $daily->save();
 
-        return redirect('/daily');
+        return redirect('/daily')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -253,6 +253,6 @@ class DapController extends Controller
         $daily = Daily::find($id);
         $daily->delete();
 
-        return redirect('/daily');
+        return redirect('/daily')->with('success', 'Data berhasil dihapus!');
     }
 }

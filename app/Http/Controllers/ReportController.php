@@ -84,6 +84,19 @@ class ReportController extends Controller
 
         // dd($dailies);
 
+        $division_ids = $dailies->pluck('division_id')->unique()->toArray();
+
+        $divisiTugas = [];
+        $divisis = Divisi::whereIn('id', $division_ids)->get();
+        foreach ($divisis as $divisi) {
+            foreach ($divisi->tugas as $task) {
+                $divisiTugas[$task['id_tugas']] = [
+                    'tugas' => $task['tugas'],
+                    'tipe' => $task['tipe']
+                ];
+            }
+        }
+
         $reports = [];
 
         foreach ($dailies as $daily) {
@@ -93,23 +106,15 @@ class ReportController extends Controller
             foreach ($tasks as $task) {
                 $id_tugas = $task['id_tugas'];
                 $score = $task['score'];
+                $tipe = isset($divisiTugas[$id_tugas]) ? $divisiTugas[$id_tugas]['tipe'] : null;
 
                 if (!isset($reports[$id_tugas])) {
                     $reports[$id_tugas] = [];
                 }
-                $reports[$id_tugas][] = ['date' => $date, 'score' => $score];
+                $reports[$id_tugas][] = ['date' => $date, 'score' => $score, 'tipe' => $tipe];
             }
         }
-
-        $division_ids = $dailies->pluck('division_id')->unique()->toArray();
-
-        $divisiTugas = [];
-        $divisis = Divisi::whereIn('id', $division_ids)->get();
-        foreach ($divisis as $divisi) {
-            foreach ($divisi->tugas as $task) {
-                $divisiTugas[$task['id_tugas']] = $task['tugas'];
-            }
-        }
+        
 
         $dateRange = [
             'startDate' => $startDate->format('Y-m-d'),

@@ -9,6 +9,10 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+        <!-- Toastr CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+        <!-- Toastr JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <style>
         trix-toolbar [data-trix-button-group = "file-tools"] {
             display: none;
@@ -19,7 +23,7 @@
 <body class="overflow-x-hidden bg-[#f5f7fb] ">
 
     <div class="w-full flex justify-end">
-        <div class="content w-[82vw] transition-all duration-500">
+        <div class="content w-4/5 transition-all duration-500">
             <x-navbar>
             </x-navbar>
             <div class="w-full px-8">
@@ -57,6 +61,8 @@
         </div>
         <x-sidebar>
         </x-sidebar>
+        <x-toastr>
+        </x-toastr>
     </div>
 
     @vite('resources/js/dom.js')

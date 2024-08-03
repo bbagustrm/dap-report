@@ -6,6 +6,7 @@ burger.addEventListener('click', () => {
     sideBar.classList.toggle('left-[-100%]')
     sideBar.classList.toggle('left-0')
     content.classList.toggle('w-full')
-    content.classList.toggle('w-[82vw]')
-    console.log('helo')
+    content.classList.toggle('w-4/5')
 })
+
+

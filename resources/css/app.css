@@ -14,7 +14,7 @@ table.dataTable.no-footer {
 
 table.dataTable tbody th, 
 table.dataTable tbody td {
-    @apply border border-gray-300 h-5;
+    @apply border border-gray-300 h-12;
 }
 
 

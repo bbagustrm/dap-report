@@ -16,13 +16,18 @@
 <body class="overflow-x-hidden bg-[#f5f7fb] ">
 
     <div class="w-full flex justify-end">
-        <div class="content w-[82vw] transition-all duration-500">
+        <div class="content w-4/5 transition-all duration-500">
             <x-navbar>
             </x-navbar>
             <div class="w-full px-8">
-                <h1 class="text-xl py-2 mb-2">Daily Activity Progress Report</h1>
+                <h1 class="text-xl py-2 mb-2">Rekap Report</h1>
                 <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
-                    <div class="flex gap-2 justify-end">
+                    <div class="flex gap-2 justify-between items-center">
+                        <a href="{{ url('/report') }}" class="btn-primary flex items-center gap-2">
+                            <svg class="w-fit h-fit" width="24" height="24">
+                                <image xlink:href="{{ asset('assets/ic-reload.svg') }}" />
+                            </svg>
+                            Reload</a>
                         <div class="flex gap-2">
                             <select id="division" class="border-[1px] px-2 h-6 border-gray-300">
                                 <option value="">All Divisions</option>
@@ -30,17 +35,17 @@
                                     <option value="{{ $division->name }}">{{ $division->name }}</option>
                                 @endforeach
                             </select>
+                            <button id="filter" class="px-4 bg-[#3b7ddd] text-white h-6">Filter</button>
                         </div>
-                        <button id="filter" class="px-4 bg-[#3b7ddd] text-white h-6">Filter</button>
                     </div>
                     <hr class="my-2">
                     <table id="myTable" class="w-full border-[1px] border-gray-300">
                         <thead class="bg-[#f5f7fb] ">
                             <tr>
                                 <th scope="col" class="w-4 border-[1px] border-gray-300">No</th>
-                                <th scope="col" class="border-[1px] border-gray-300">Name</th>
+                                <th scope="col" class="w-[16vw] border-[1px] border-gray-300">Name</th>
                                 <th scope="col" class="border-[1px] border-gray-300">Divisi</th>
-                                <th scope="col" class="border-[1px] border-gray-300">Action</th>
+                                <th scope="col" class="w-[10vw] border-[1px] border-gray-300">Action</th>
                             </tr>
                         </thead>
                     </table>

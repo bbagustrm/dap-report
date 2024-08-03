@@ -10,24 +10,35 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <title>User</title>
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <title>Rekap Report</title>
 </head>
 
 <body class="overflow-x-hidden bg-[#f5f7fb] ">
 
     <div class="w-full flex justify-end">
-        <div class="content w-[82vw] transition-all duration-500">
+        <div class="content w-4/5 transition-all duration-500">
             <x-navbar>
             </x-navbar>
             <div class="w-full px-8">
-                <h1 class="text-xl py-2 mb-2">Daily Activity Progress Report</h1>
+                <div class="w-full flex gap-2 py-2 mb-2">
+                    <h1 class="text-xl">Daily Activity Progress Report</h1>
+                </div>
                 <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
                     <div class="flex justify-between items-center">
-                        <a href="{{ route('dailies.create') }}" class="btn-primary flex items-center gap-2">
+                        {{-- <a href="{{ route('dailies.create') }}" class="btn-primary flex items-center gap-2">
                             <svg class="w-fit h-fit" width="24" height="24">
                                 <image xlink:href="{{ asset('assets/ic-plus-white.svg') }}" />
                             </svg>
-                            Create</a>
+                            Create</a> --}}
+                        <a href="{{ url('/daily') }}" class="btn-primary flex items-center gap-2">
+                            <svg class="w-fit h-fit" width="24" height="24">
+                                <image xlink:href="{{ asset('assets/ic-reload.svg') }}" />
+                            </svg>
+                            Reload</a>
                         <div class="flex gap-2">
                             <div class="flex gap-2 items-center">
                                 <select id="division" class="border-[1px] px-2 h-6 border-gray-300">
@@ -136,6 +147,8 @@
         </div>
         <x-sidebar>
         </x-sidebar>
+        <x-toastr>
+        </x-toastr>
     </div>
 
     @vite('resources/js/dom.js')
