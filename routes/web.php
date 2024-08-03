@@ -25,16 +25,6 @@ Route::get('report', [ReportController::class, 'index'])->name('report.index');
 Route::get('/report/{id}', [ReportController::class, 'show'])->name('report.show');
 
 
-
-
-// Route::get('posts', [PostController::class, 'index']);
-// Route::get('posts/create', [PostController::class, 'create']);
-// Route::get('posts/{id}', [PostController::class, 'show']);
-// Route::post('posts', [PostController::class, 'store']);
-// Route::get('posts/{id}/edit', [PostController::class, 'edit']);
-// Route::patch('posts/{id}', [PostController::class, 'update']);
-// Route::delete('posts/{id}', [PostController::class, 'destroy']);
-
 // import json to sqlite
 Route::get('/import-divisi', [ImportController::class, 'import_divisi']);
 Route::get('/import-user', [ImportController::class, 'import_user']);
