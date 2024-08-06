@@ -36,22 +36,6 @@
                                     <option value="{{ $division->name }}">{{ $division->name }}</option>
                                 @endforeach
                             </select>
-                            <select id="month" class="w-[102px] border-[1px] px-1 border-gray-300 h-full rounded">
-                                @php
-                                    $months = [
-                                        'January', 'February', 'March', 'April', 'May', 'June',
-                                        'July', 'August', 'September', 'October', 'November', 'December'
-                                    ];
-                                @endphp     
-                                @foreach ($months as $month)
-                                <option value="{{ $month }}">{{ $month }}</option>
-                                @endforeach
-                            </select>
-                            <select id="year" class="w-16 border-[1px] px-1 border-gray-300 h-full rounded">
-                                @for ($i = 2010; $i <= 2030; $i++)
-                                    <option value="{{ $i }}">{{ $i }}</option>
-                                @endfor
-                            </select>
                             <button id="filter"
                                 class="px-3 py-1 text-center bg-[#007bff] text-white rounded border-[1px] border-[#007bff] hover:bg-[#0069d9] transition-all duration-300 h-full">Filter</button>
                         </div>
