@@ -27,35 +27,35 @@
                 <div class="w-full flex gap-2 py-2 mb-2">
                     <h1 class="text-xl">Daily Activity Progress Report</h1>
                 </div>
-                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
-                    <div class="flex justify-between items-center">
+                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm rounded-md">
+                    <div class="flex justify-between items-center h-8 ">
                         {{-- <a href="{{ route('dailies.create') }}" class="btn-primary flex items-center gap-2">
                             <svg class="w-fit h-fit" width="24" height="24">
                                 <image xlink:href="{{ asset('assets/ic-plus-white.svg') }}" />
                             </svg>
                             Create</a> --}}
-                        <a href="{{ url('/daily') }}" class="btn-primary flex items-center gap-2">
+                        <a href="{{ url('/daily') }}" class="px-3 py-1 text-center bg-[#007bff] text-white rounded border-[1px] border-[#007bff] hover:bg-[#0069d9] transition-all duration-300 flex items-center gap-2 h-full">
                             <svg class="w-fit h-fit" width="24" height="24">
                                 <image xlink:href="{{ asset('assets/ic-reload.svg') }}" />
                             </svg>
                             Reload</a>
-                        <div class="flex gap-2">
-                            <div class="flex gap-2 items-center">
-                                <select id="division" class="border-[1px] px-2 h-6 border-gray-300">
+                        <div class="flex gap-2 items-center h-full">
+                            <div class="flex gap-2 items-center h-full">
+                                <select id="division" class="border-[1px] py-1 px-3 border-gray-300 rounded h-full">
                                     <option value="">All Divisions</option>
                                     @foreach ($divisions as $division)
                                         <option value="{{ $division->name }}">{{ $division->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex gap-2 items-center">
-                                <input type="date" id="start_date" class="border-[1px] px-2 h-6 border-gray-300">
+                            <div class="flex gap-2 items-center h-full">
+                                <input type="date" id="start_date" class="border-[1px] py-1 px-3 border-gray-300 rounded h-full">
                             </div>
                             s.d
-                            <div class="flex gap-2">
-                                <input type="date" id="end_date" class="border-[1px] px-2 h-6 border-gray-300">
+                            <div class="flex gap-2 h-full">
+                                <input type="date" id="end_date" class="border-[1px] py-1 px-3 border-gray-300 rounded h-full">
                             </div>
-                            <button id="filter" class="px-4 bg-[#3b7ddd] text-white h-6">Filter</button>
+                            <button id="filter" class="px-3 py-1 text-center bg-[#007bff] text-white rounded border-[1px] border-[#007bff] hover:bg-[#0069d9] transition-all duration-300 h-full">Filter</button>
                         </div>
                     </div>
                     <hr class="my-2">
@@ -63,11 +63,11 @@
                         <thead class="bg-[#f5f7fb] ">
                             <tr>
                                 <th scope="col" class="w-4 border-[1px] border-gray-300">No</th>
-                                <th scope="col" class="border-[1px] border-gray-300">Name</th>
+                                <th scope="col" class="w-56 border-[1px] border-gray-300">Name</th>
                                 <th scope="col" class="border-[1px] border-gray-300">Divisi</th>
                                 <th scope="col" class="w-[25vw] border-[1px] border-gray-300">Note</th>
                                 <th scope="col" class="w-32 border-[1px] border-gray-300">Tanggal</th>
-                                <th scope="col" class="w-48 border-[1px] border-gray-300">Action</th>
+                                <th scope="col" class="w-64 border-[1px] border-gray-300">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -89,7 +89,7 @@
                                     [10, 25, 50, "All"]
                                 ],
                                 "language": {
-                                    "lengthMenu": "Menampilkan _MENU_ data",
+                                    "lengthMenu": "_MENU_ data ditampilkan",
                                     "search": "",
                                     "searchPlaceholder": "Cari..."
                                 },

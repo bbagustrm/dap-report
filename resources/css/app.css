@@ -14,7 +14,7 @@ table.dataTable.no-footer {
 
 table.dataTable tbody th, 
 table.dataTable tbody td {
-    @apply border border-gray-300 h-12;
+    @apply border border-gray-300 h-fit;
 }
 
 
@@ -24,39 +24,52 @@ table.dataTable tbody td {
 }
 
 .btn-primary{
-    @apply p-2 text-center bg-[#007bff] text-white rounded-md hover:bg-[#0069d9] transition-all duration-300;
+    @apply px-3 py-2 text-center bg-[#007bff] text-white rounded border-[1px] border-[#007bff] hover:bg-[#0069d9] transition-all duration-300;
+}
+
+.btn-primary2{
+  @apply px-3 py-1 text-center bg-[#007bff] text-white rounded border-[1px] border-[#007bff] hover:bg-[#0069d9] transition-all duration-300;
 }
 
 .btn-success{
-    @apply p-2 text-center bg-[#28a745] text-white rounded-md hover:bg-[#218838] transition-all duration-300;
+    @apply px-3 py-2 text-center bg-[#28a745] text-white rounded border-[1px] border-[#28a745] hover:bg-[#218838] transition-all duration-300;
+}
+.btn-success2{
+  @apply px-3 py-1 text-center bg-[#28a745] text-white rounded border-[1px] border-[#28a745] hover:bg-[#218838] transition-all duration-300;
 }
 
 .btn-danger{
-    @apply p-2 text-center bg-[#ffc107] text-black rounded-md hover:bg-[#e0a800] transition-all duration-300;
+    @apply px-3 py-2 text-center bg-[#ffc107] text-black rounded border-[1px] border-[#ffc107] hover:bg-[#e0a800] transition-all duration-300;
+}
+.btn-danger2{
+  @apply px-3 py-1 text-center bg-[#ffc107] text-black rounded border-[1px] border-[#ffc107] hover:bg-[#e0a800] transition-all duration-300;
 }
 
 .btn-warning{
-    @apply  p-2 text-center bg-[#dc3545] text-white rounded-md hover:bg-[#c82333] transition-all duration-300;
+    @apply  px-3 py-2 text-center bg-[#dc3545] text-white rounded border-[1px] border-[#dc3545] hover:bg-[#c82333] transition-all duration-300;
+}
+.btn-warning2{
+  @apply  px-3 py-1 text-center bg-[#dc3545] text-white rounded border-[1px] border-[#dc3545] hover:bg-[#c82333] transition-all duration-300;
 }
 
 .btn-ghost-primary{
-    @apply p-2 text-center border-[1px] border-[#007bff] text-[#007bff] rounded-md hover:bg-[#007bff] hover:text-white transition-all duration-300;
+    @apply px-3 py-2 text-center border-[1px] border-[#007bff] text-[#007bff] rounded hover:bg-[#007bff] hover:text-white transition-all duration-300;
 }
 
 .btn-ghost-success{
-    @apply p-2 text-center border-[1px] border-[#28a745] text-[#28a745] rounded-md hover:bg-[#28a745] hover:text-white transition-all duration-300;
+    @apply px-3 py-2 text-center border-[1px] border-[#28a745] text-[#28a745] rounded hover:bg-[#28a745] hover:text-white transition-all duration-300;
 }
 
 .btn-ghost-danger{
-    @apply p-2 text-center border-[1px] border-[#ffc107] text-[#ffc107] rounded-md hover:bg-[#ffc107] hover:text-white transition-all duration-300;
+    @apply px-3 py-2 text-center border-[1px] border-[#ffc107] text-[#ffc107] rounded hover:bg-[#ffc107] hover:text-white transition-all duration-300;
 }
 
 .btn-ghost-warning{
-    @apply p-2 text-center border-[1px] border-[#dc3545] text-[#dc3545] rounded-md hover:bg-[#dc3545] hover:text-white transition-all duration-300;
+    @apply px-3 py-2 text-center border-[1px] border-[#dc3545] text-[#dc3545] rounded hover:bg-[#dc3545] hover:text-white transition-all duration-300;
 }
 
 .btn-secondary{
-    @apply p-2 text-center rounded-md bg-[#6c757d] hover:bg-[#5a6268] text-white transition-all duration-300;
+    @apply px-3 py-2 text-center rounded bg-[#6c757d] hover:bg-[#5a6268] text-white transition-all duration-300;
 }
 
 

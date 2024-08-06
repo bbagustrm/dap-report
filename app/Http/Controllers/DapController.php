@@ -43,14 +43,14 @@ class DapController extends Controller
                     $editUrl = route('dailies.edit', $row->id);
                     $deleteUrl = route('dailies.destroy', $row->id);
                     $csrfToken = csrf_token();
-                    $btn = '<a href="' . $showUrl . '" class="btn-primary">Show</a>';
+                    $btn = '<a href="' . $showUrl . '" class="btn-primary2">Show</a>';
                     $btn .= ' ';
-                    $btn .= '<a href="' . $editUrl . '" class="btn-danger">Edit</a>';
+                    $btn .= '<a href="' . $editUrl . '" class="btn-danger2">Edit</a>';
                     $btn .= ' ';
                     $btn .= '<form action="' . $deleteUrl . '" method="POST" style="display:inline-block;">
                             ' . method_field('DELETE') . '
                             <input type="hidden" name="_token" value="' . $csrfToken . '">
-                            <button type="submit" class="btn-warning" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                            <button type="submit" class="btn-warning2" onclick="return confirm(\'Are you sure?\')">Delete</button>
                          </form>';
                     return $btn;
                 })

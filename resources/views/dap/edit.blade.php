@@ -35,7 +35,7 @@
                     </a>
                     <h1 class="text-xl">Edit Daily Note</h1>
                 </div>
-                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
+                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm rounded-md">
                     <form class="flex flex-col gap-4" action="{{ route('dailies.update', $daily->id) }}" method="POST">
                         @csrf
                         @method('PUT')

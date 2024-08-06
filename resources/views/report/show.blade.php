@@ -29,7 +29,7 @@
                     </a>
                     <h1 class="text-xl">Monitoring Report</h1>
                 </div>
-                <div class="flex flex-col items-center gap-8 w-full bg-white px-4 py-4 text-sm shadow-sm">
+                <div class="flex flex-col items-center gap-8 w-full bg-white px-4 py-4 text-sm shadow-sm rounded-md">
                     @if (isset($daily) && count($daily) > 0)
                         <div class="w-full">
                             <table class="w-full">

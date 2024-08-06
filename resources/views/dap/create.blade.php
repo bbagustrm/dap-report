@@ -28,7 +28,7 @@
             </x-navbar>
             <div class="w-full px-8">
                 <h1 class="text-xl py-2 mb-2">Edit Daily Note</h1>
-                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
+                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm rounded-md">
                     <form class="flex flex-col gap-4" method="POST" action="{{ url('/daily/store') }}">
                         @csrf
                         <div class="flex items-center gap-4">

@@ -28,7 +28,7 @@
                     </a>
                     <h1 class="text-xl">Show Daily Note</h1>
                 </div>
-                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
+                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm rounded-md">
                     <div class="flex flex-col gap-4">
                         <div class="flex flex-col gap-4">
                             <table>
@@ -76,9 +76,9 @@
                             </table>
 
                         </div>
-                        {{-- <div class="w-full flex gap-1">
+                        <div class="w-full flex gap-1 ">
                             <a href="{{ url('/daily') }}" class="btn-warning">Back</a>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -21,21 +21,39 @@
             </x-navbar>
             <div class="w-full px-8">
                 <h1 class="text-xl py-2 mb-2">Rekap Report</h1>
-                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm">
-                    <div class="flex gap-2 justify-between items-center">
-                        <a href="{{ url('/report') }}" class="btn-primary flex items-center gap-2">
+                <div class="w-full bg-white px-4 py-4 text-sm shadow-sm rounded-md">
+                    <div class="flex gap-2 justify-between items-center h-8">
+                        <a href="{{ url('/report') }}"
+                            class="px-3 py-1 text-center bg-[#007bff] text-white rounded border-[1px] border-[#007bff] hover:bg-[#0069d9] transition-all duration-300 flex items-center gap-2 h-full">
                             <svg class="w-fit h-fit" width="24" height="24">
                                 <image xlink:href="{{ asset('assets/ic-reload.svg') }}" />
                             </svg>
                             Reload</a>
-                        <div class="flex gap-2">
-                            <select id="division" class="border-[1px] px-2 h-6 border-gray-300">
+                        <div class="flex gap-2 h-full">
+                            <select id="division" class="border-[1px] px-2 border-gray-300 h-full rounded">
                                 <option value="">All Divisions</option>
                                 @foreach ($divisions as $division)
                                     <option value="{{ $division->name }}">{{ $division->name }}</option>
                                 @endforeach
                             </select>
-                            <button id="filter" class="px-4 bg-[#3b7ddd] text-white h-6">Filter</button>
+                            <select id="month" class="w-[102px] border-[1px] px-1 border-gray-300 h-full rounded">
+                                @php
+                                    $months = [
+                                        'January', 'February', 'March', 'April', 'May', 'June',
+                                        'July', 'August', 'September', 'October', 'November', 'December'
+                                    ];
+                                @endphp     
+                                @foreach ($months as $month)
+                                <option value="{{ $month }}">{{ $month }}</option>
+                                @endforeach
+                            </select>
+                            <select id="year" class="w-16 border-[1px] px-1 border-gray-300 h-full rounded">
+                                @for ($i = 2010; $i <= 2030; $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                            <button id="filter"
+                                class="px-3 py-1 text-center bg-[#007bff] text-white rounded border-[1px] border-[#007bff] hover:bg-[#0069d9] transition-all duration-300 h-full">Filter</button>
                         </div>
                     </div>
                     <hr class="my-2">
@@ -43,7 +61,7 @@
                         <thead class="bg-[#f5f7fb] ">
                             <tr>
                                 <th scope="col" class="w-4 border-[1px] border-gray-300">No</th>
-                                <th scope="col" class="w-[16vw] border-[1px] border-gray-300">Name</th>
+                                <th scope="col" class="w-56 border-[1px] border-gray-300">Name</th>
                                 <th scope="col" class="border-[1px] border-gray-300">Divisi</th>
                                 <th scope="col" class="w-[10vw] border-[1px] border-gray-300">Action</th>
                             </tr>

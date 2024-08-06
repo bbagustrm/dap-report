@@ -32,7 +32,7 @@ class ReportController extends Controller
             return datatables()->of($dailies)
                 ->addColumn('action', function ($row) {
                     $showUrl = route('report.show', $row->user_id);
-                    $btn = '<a href="' . $showUrl . '" class="btn-primary">Show</a>';
+                    $btn = '<a href="' . $showUrl . '" class="btn-primary2">Show</a>';
                     return $btn;
                 })
                 ->addIndexColumn()
